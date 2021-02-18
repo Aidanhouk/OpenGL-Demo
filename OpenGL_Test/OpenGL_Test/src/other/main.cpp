@@ -292,7 +292,9 @@ int main(void)
 
 #ifdef IMGUI
 			if (camera.getUseMouse()) {
+				ImGui::Text("Press Q to hide/show this debug info");
 #ifdef LIGHTING
+				ImGui::Text("Press F to switch flashlight");
 				ImGui::SliderFloat3("Light 1 position", &pointLights.getPosition(0).x, -20.0f, 20.0f);
 				if (ImGui::Button("Switch light 1", ImVec2(270.0f, 30.0f)))
 					pointLights.switchLight(0);

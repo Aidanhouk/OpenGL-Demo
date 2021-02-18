@@ -1,47 +1,21 @@
-﻿  Camera.cpp
-  DirectionalLight.cpp
-  IndexBuffer.cpp
-  Light.cpp
-  main.cpp
+﻿  main.cpp
 c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(67): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(333): warning C4100: 'window': unreferenced formal parameter
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(381): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(382): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(386): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(387): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(388): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(389): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(376): warning C4100: 'window': unreferenced formal parameter
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(397): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(395): warning C4100: 'xoffset': unreferenced formal parameter
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(395): warning C4100: 'window': unreferenced formal parameter
-  Mesh.cpp
-  Model.cpp
-c:\users\timur\source\repos\opengl_test\opengl_test\src\model\model.cpp(119): warning C4100: 'gamma': unreferenced formal parameter
-  PointLight.cpp
-  PointLightsControl.cpp
-  Renderer.cpp
-  Shader.cpp
-  SpotLight.cpp
-  Texture.cpp
-  glm.cpp
-c:\users\timur\source\repos\opengl_test\opengl_test\src\vendor\glm\detail\type_quat.hpp(48): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\timur\source\repos\opengl_test\opengl_test\src\vendor\glm\detail\type_quat.hpp(133): note: see reference to class template instantiation 'glm::qua<T,Q>' being compiled
-  imgui.cpp
-  imgui_draw.cpp
-  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_widgets.cpp
-  stb_image.cpp
-  Compiling...
-  VertexArray.cpp
-  VertexBuffer.cpp
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(335): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(383): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(384): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(388): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(389): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(390): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(391): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(378): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(399): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(397): warning C4100: 'xoffset': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(397): warning C4100: 'window': unreferenced formal parameter
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-c:\users\timur\source\repos\opengl_test\opengl_test\src\model\model.cpp(140): warning C4701: potentially uninitialized local variable 'format' used
-  1477 of 2299 functions (64.2%) were compiled, the rest were copied from previous compilation.
-    349 functions were new in current compilation
-    122 functions had inline decision re-evaluated but remain unchanged
+  1 of 2299 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\timur\source\repos\OpenGL_Test\Release\vc120.pdb'; linking object as if no debug info
   OpenGL_Test.vcxproj -> C:\Users\timur\source\repos\OpenGL_Test\Release\OpenGL_Test.exe
