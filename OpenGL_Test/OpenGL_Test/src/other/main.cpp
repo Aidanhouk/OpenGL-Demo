@@ -88,8 +88,11 @@ int main(void)
 
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
 	GLCall(glEnable(GL_DEPTH_TEST));
+	//GLCall(glDepthFunc(GL_LESS)); // default
+	GLCall(glEnable(GL_STENCIL_TEST));
+	GLCall(glStencilFunc(GL_NOTEQUAL, 1, 0xFF));
+	GLCall(glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE));
 
 	stbi_set_flip_vertically_on_load(1);
 
@@ -179,10 +182,11 @@ int main(void)
 		Texture textureCrateLight("res/textures/crate500light.png", GL_REPEAT);
 		glm::vec3 scaleCubes(1.0f, 1.0f, 1.0f);
 		glm::vec3 rotateCubes(0.0f, 0.0f, 0.0f);
+		unsigned int cubesCount{ 2 };
 		glm::vec3 cubePositions[] = {
 			glm::vec3(-5.0f, -5.0f, -2.0f),
 			glm::vec3(0.0f, 5.0f, -1.1f),
-			glm::vec3(5.0f, 0.0f, -3.0f)
+			//glm::vec3(5.0f, 0.0f, -3.0f)
 		};
 #endif // CUBES
 
@@ -191,12 +195,12 @@ int main(void)
 		DirectionalLight dirLight(glm::vec3(0.0f, -0.5f, 0.0f));
 		PointLightsControl pointLights;
 		pointLights.addPointLight(glm::vec3(-2.5f, 0.3f, -2.25f));
-		pointLights.addPointLight(glm::vec3(5.0f, 0.3f, -2.25f));
+		pointLights.addPointLight(glm::vec3(4.0f, 0.3f, -2.25f));
 #endif // LIGHTING
 
-		Shader shader("res/shaders/Texture.shader");
-		Shader modelShader("res/shaders/Model.shader");
+		Shader modelShader("res/shaders/Model.shader"); // model & textures shader
 		Model ourModel("res/models/backpack/backpack.obj");
+		Shader singleColorShader("res/shaders/SingleColor.shader");
 
 		Renderer renderer;
 
@@ -231,43 +235,44 @@ int main(void)
 			glm::mat4 projMat{ glm::perspective(glm::radians(camera.getFOV()), windowWidth / windowHeight, 0.1f, 100.0f) };
 			glm::mat4 viewMat{ camera.getViewMatrix() };
 
-			modelShader.bind();
-			{
-				glm::mat4 modelMat{ glm::mat4(1.0f) };
-				modelShader.setUniformMat4f("u_Model", modelMat);
-				modelShader.setUniformMat4f("u_View", viewMat);
-				modelShader.setUniformMat4f("u_Projection", projMat);
-				ourModel.draw(modelShader);
-			}
+			glStencilMask(0x00);
 
 			// setting all lighting uniforms
 #ifdef LIGHTING
 			{
+				modelShader.bind();
+
 				dirLight.bindToShader(modelShader);
 				pointLights.bindToShader(modelShader);
 				spotLight.bindToShader(modelShader);
 			}
 #endif // LIGHTING
 
+			glStencilFunc(GL_ALWAYS, 1, 0xFF);
+			glStencilMask(0xFF);
+
 			// drawing cubes
 #ifdef CUBES
-			//shader.bind();
-			for (unsigned int i = 0; i < 3; ++i) {
-				glm::mat4 modelMat{ glm::translate(glm::mat4(1.0f), cubePositions[i]) };
+			modelShader.bind();
+			textureCrate.bind(0);
+			textureCrateLight.bind(1);
+			modelShader.setUniform1i("u_Material.diffuse", 0);
+			modelShader.setUniform1i("u_Material.specular", 1);
+			modelShader.setUniform1f("u_Material.shininess", 12.8f);
+
+			float scaleDegree{ (float)glfwGetTime() };
+
+			for (unsigned int i = 0; i < cubesCount; ++i) {
+				glm::mat4 modelMat{ glm::mat4(1.0f) };
 				// auto-rotating
-				modelMat = glm::rotate(modelMat, (float)glfwGetTime() * glm::radians(10.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
+				modelMat = glm::rotate(modelMat, scaleDegree * glm::radians(10.0f * i), glm::vec3(0.1f, 0.03f, 0.05f));
+				modelMat = glm::translate(modelMat, cubePositions[i]);
 #ifdef IMGUI
 				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.x), glm::vec3(1.0f, 0.0f, 0.0f));
 				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.y), glm::vec3(0.0f, 1.0f, 0.0f));
 				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.z), glm::vec3(0.0f, 0.0f, 1.0f));
 				modelMat = glm::scale(modelMat, scaleCubes);
 #endif // IMGUI
-				textureCrate.bind(0);
-				textureCrateLight.bind(1);
-				modelShader.bind();
-				modelShader.setUniform1i("u_Material.diffuse", 0);
-				modelShader.setUniform1i("u_Material.specular", 1);
-				modelShader.setUniform1f("u_Material.shininess", 12.8f);
 
 				modelShader.setUniformMat4f("u_Model", modelMat);
 				modelShader.setUniformMat4f("u_View", viewMat);
@@ -277,7 +282,55 @@ int main(void)
 
 				renderer.draw(vertArrSquare, indBuffSquare);
 			}
+
+			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+			glStencilMask(0x00);
+			glDisable(GL_DEPTH_TEST);
+
+			singleColorShader.bind();
+			float scale{ 1.2f };
+			float move{ (scale - 1) / 2 };
+
+			textureCrate.bind(0);
+			textureCrateLight.bind(1);
+
+			for (unsigned int i = 0; i < cubesCount; ++i) {
+				glm::mat4 modelMat{ glm::mat4(1.0f) };
+
+				// auto-rotating
+				modelMat = glm::rotate(modelMat, scaleDegree * glm::radians(10.0f * i), glm::vec3(0.1f, 0.03f, 0.05f));
+				modelMat = glm::translate(modelMat, glm::vec3(cubePositions[i].x - move, cubePositions[i].y - move, cubePositions[i].z - move));
+
+				modelMat = glm::scale(modelMat, glm::vec3(scale, scale, scale));
+#ifdef IMGUI
+				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.x), glm::vec3(1.0f, 0.0f, 0.0f));
+				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.y), glm::vec3(0.0f, 1.0f, 0.0f));
+				modelMat = glm::rotate(modelMat, glm::radians(-rotateCubes.z), glm::vec3(0.0f, 0.0f, 1.0f));
+				modelMat = glm::scale(modelMat, scaleCubes);
+#endif // IMGUI
+
+				singleColorShader.setUniformMat4f("u_Model", modelMat);
+				singleColorShader.setUniformMat4f("u_View", viewMat);
+				singleColorShader.setUniformMat4f("u_Projection", projMat);
+
+				renderer.draw(vertArrSquare, indBuffSquare);
+			}
 #endif // CUBES
+
+			glStencilMask(0xFF);
+			glStencilFunc(GL_ALWAYS, 0, 0xFF);
+			glEnable(GL_DEPTH_TEST);
+
+			// drawing model
+			{
+				modelShader.bind();
+
+				glm::mat4 modelMat{ glm::mat4(1.0f) };
+				modelShader.setUniformMat4f("u_Model", modelMat);
+				modelShader.setUniformMat4f("u_View", viewMat);
+				modelShader.setUniformMat4f("u_Projection", projMat);
+				ourModel.draw(modelShader);
+			}
 
 			// drawing point light sources
 #ifdef LIGHTING
@@ -307,6 +360,7 @@ int main(void)
 #ifdef CUBES
 				ImGui::SliderFloat3("Cube 1 position", &cubePositions[0].x, -10.0f, 10.0f);
 				ImGui::SliderFloat3("Cube 2 position", &cubePositions[1].x, -10.0f, 10.0f);
+				ImGui::SliderFloat3("Cube 3 position", &cubePositions[2].x, -10.0f, 10.0f);
 				ImGui::SliderFloat3("Scale", &scaleCubes.x, 0.0f, 5.0f);
 				ImGui::SliderFloat3("Rotate", &rotateCubes.x, 0.0f, 360.0f);
 #endif // CUBES

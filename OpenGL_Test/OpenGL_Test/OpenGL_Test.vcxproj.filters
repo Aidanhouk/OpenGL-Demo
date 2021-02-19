@@ -557,6 +557,7 @@
     <None Include="res\shaders\Model.shader">
       <Filter>Source Files\shader\shaders</Filter>
     </None>
+    <None Include="res\shaders\SingleColor.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\glm\ext\vector_double2.hpp">

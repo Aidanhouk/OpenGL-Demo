@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\LightSource.shader" />
+    <None Include="res\shaders\SingleColor.shader" />
     <None Include="res\shaders\Texture.shader" />
     <None Include="res\shaders\Model.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
