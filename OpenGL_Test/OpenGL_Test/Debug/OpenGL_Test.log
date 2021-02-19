@@ -1,14 +1,14 @@
 ﻿  main.cpp
 c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(67): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(389): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(388): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(436): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(437): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(438): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(441): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(442): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(443): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(443): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(444): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(445): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(432): warning C4100: 'window': unreferenced formal parameter
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(453): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(451): warning C4100: 'xoffset': unreferenced formal parameter
-c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(451): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(431): warning C4100: 'window': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(452): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(450): warning C4100: 'xoffset': unreferenced formal parameter
+c:\users\timur\source\repos\opengl_test\opengl_test\src\other\main.cpp(450): warning C4100: 'window': unreferenced formal parameter
   OpenGL_Test.vcxproj -> C:\Users\timur\source\repos\OpenGL_Test\Debug\OpenGL_Test.exe

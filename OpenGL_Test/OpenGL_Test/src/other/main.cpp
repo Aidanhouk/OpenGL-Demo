@@ -360,7 +360,6 @@ int main(void)
 #ifdef CUBES
 				ImGui::SliderFloat3("Cube 1 position", &cubePositions[0].x, -10.0f, 10.0f);
 				ImGui::SliderFloat3("Cube 2 position", &cubePositions[1].x, -10.0f, 10.0f);
-				ImGui::SliderFloat3("Cube 3 position", &cubePositions[2].x, -10.0f, 10.0f);
 				ImGui::SliderFloat3("Scale", &scaleCubes.x, 0.0f, 5.0f);
 				ImGui::SliderFloat3("Rotate", &rotateCubes.x, 0.0f, 360.0f);
 #endif // CUBES
