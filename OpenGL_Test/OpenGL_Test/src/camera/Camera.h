@@ -62,6 +62,7 @@ public:
 	// Обрабатывает входные данные, полученные от события колеса прокрутки мыши. Интересуют только входные данные на вертикальную ось колесика 
 	void processMouseScroll(float yoffset);
 	void stopOrResumeMouse() { m_useMouse = !m_useMouse; }
+	void turnDegree(float yaw);
 private:
 	// Вычисляет вектор-прямо по (обновленным) углам Эйлера камеры
 	void updateCameraVectors();

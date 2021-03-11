@@ -25,14 +25,12 @@ void PointLight::bindToShader(Shader & shader)
 	shader.setUniform1i(pntLights + "isOn", m_IsOn);
 }
 
-void PointLight::drawSource(Shader &shader, glm::mat4 viewMat, glm::mat4 projMat)
+void PointLight::drawSource(Shader &shader)
 {
 	glm::mat4 lightModelMat{ glm::translate(glm::mat4(1.0f), m_Position) };
-	lightModelMat = glm::scale(lightModelMat, glm::vec3(0.05f));
+	lightModelMat = glm::scale(lightModelMat, glm::vec3(0.1f));
 
 	shader.setUniformMat4f("u_Model", lightModelMat);
-	shader.setUniformMat4f("u_View", viewMat);
-	shader.setUniformMat4f("u_Projection", projMat);
 
 	shader.setUniformVec3("u_LightColor", m_Color);
 }

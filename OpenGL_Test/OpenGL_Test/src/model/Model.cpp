@@ -9,7 +9,7 @@
 void Model::loadModel(const std::string &path)
 {
 	Assimp::Importer import;
-	const aiScene *scene{ import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs) };
+	const aiScene *scene{ import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace) };
 
 	ASSERT(!(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode));
 	m_Directory = path.substr(0, path.find_last_of('/'));
@@ -39,11 +39,14 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 	for (unsigned int i = 0; i < mesh->mNumVertices; ++i) {
 		struct_Vertex vertex;
 		glm::vec3 vector;
+
+		// positions vector
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
 		vertex.m_Position = vector;
 
+		// normals vector
 		vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
@@ -59,6 +62,18 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 		else
 			vertex.m_TexCoords = glm::vec2(0.0f, 0.0f);
 
+		// tangent vector
+		vector.x = mesh->mTangents[i].x;
+		vector.y = mesh->mTangents[i].y;
+		vector.z = mesh->mTangents[i].z;
+		vertex.m_Tangent = vector;
+
+		// bitangent vector
+		vector.x = mesh->mBitangents[i].x;
+		vector.y = mesh->mBitangents[i].y;
+		vector.z = mesh->mBitangents[i].z;
+		vertex.m_Bitangent = vector;
+
 		vertices.push_back(vertex);
 	}
 	// processing indices
@@ -72,18 +87,16 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
 
-		std::vector<struct_Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		std::vector<struct_Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
-		std::vector<struct_Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		std::vector<struct_Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
-		// 3. Карты нормалей
-		std::vector<struct_Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		std::vector<struct_Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "normal");
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 
-		// 4. Карты высот
-		std::vector<struct_Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		std::vector<struct_Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "height");
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 	}
 
@@ -116,7 +129,7 @@ std::vector<struct_Texture> Model::loadMaterialTextures(aiMaterial * mat, aiText
 	return textures;
 }
 
-unsigned int Model::textureFromFile(const char * path, const std::string & directory, bool gamma)
+unsigned int Model::textureFromFile(const char * path, const std::string & directory)
 {
 	std::string filename{ std::string(path) };
 	filename = directory + '/' + filename;
@@ -129,13 +142,16 @@ unsigned int Model::textureFromFile(const char * path, const std::string & direc
 	if (data)
 	{
 		GLenum format;
-		if (nrComponents == 1)
+		if (nrComponents == 1) {
 			format = GL_RED;
-		else if (nrComponents == 3)
+		}
+		else if (nrComponents == 3) {
 			format = GL_RGB;
-		else if (nrComponents == 4)
+		}
+		else if (nrComponents == 4) {
 			format = GL_RGBA;
-
+		}
+		
 		GLCall(glBindTexture(GL_TEXTURE_2D, textureID));
 		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data));
 		GLCall(glGenerateMipmap(GL_TEXTURE_2D));

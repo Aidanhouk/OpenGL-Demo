@@ -139,7 +139,7 @@
   <ItemGroup>
     <ClCompile Include="src\camera\Camera.cpp" />
     <ClCompile Include="src\lighting\DirectionalLight.cpp" />
-    <ClCompile Include="src\vertexProcessing\IndexBuffer.cpp" />
+    <ClCompile Include="src\vertexProcessing\ElementBuffer.cpp" />
     <ClCompile Include="src\lighting\Light.cpp" />
     <ClCompile Include="src\other\main.cpp" />
     <ClCompile Include="src\model\Mesh.cpp" />
@@ -161,10 +161,20 @@
     <ClCompile Include="src\vertexProcessing\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\LightSource.shader" />
-    <None Include="res\shaders\SingleColor.shader" />
-    <None Include="res\shaders\Texture.shader" />
-    <None Include="res\shaders\Model.shader" />
+    <None Include="res\shaders\default\Default.shader" />
+    <None Include="res\shaders\default\DefaultNormalsParallax.shader" />
+    <None Include="res\shaders\FrameBuffer.shader" />
+    <None Include="res\shaders\geometryShader\GeometryShader.shader" />
+    <None Include="res\shaders\planet\Rock.shader" />
+    <None Include="res\shaders\default\LightSource.shader" />
+    <None Include="res\shaders\geometryShader\Normals.shader" />
+    <None Include="res\shaders\planet\Planet.shader" />
+    <None Include="res\shaders\shadows\pointLight\PointShadows.shader" />
+    <None Include="res\shaders\shadows\pointLight\PointShadowsDepth.shader" />
+    <None Include="res\shaders\shadows\directionalLight\DirectionalShadowsDepth.shader" />
+    <None Include="res\shaders\skybox\Skybox.shader" />
+    <None Include="res\shaders\skybox\TextureSkybox.shader" />
+    <None Include="res\shaders\transparent\TransparentTexture.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -305,7 +315,7 @@
   <ItemGroup>
     <ClInclude Include="src\camera\Camera.h" />
     <ClInclude Include="src\lighting\DirectionalLight.h" />
-    <ClInclude Include="src\vertexProcessing\IndexBuffer.h" />
+    <ClInclude Include="src\vertexProcessing\ElementBuffer.h" />
     <ClInclude Include="src\lighting\Light.h" />
     <ClInclude Include="src\model\Mesh.h" />
     <ClInclude Include="src\model\Model.h" />

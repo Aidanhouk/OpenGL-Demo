@@ -11,16 +11,9 @@ public:
 	virtual ~DirectionalLight() {};
 
 	virtual void bindToShader(Shader &shader) override;
+	void move(float deltatime);
 
 	glm::vec3 getDirection() const { return m_Direction; }
-
+	glm::vec3& getDirectionAlt() { return m_Direction; }
 	void setDirection(const glm::vec3 &direction) { m_Direction = direction; }
 };
-// moving code
-//float dirLightStep{ 0.0001 };
-
-//dirLightDirection.x += dirLightStep;
-//if (dirLightDirection.x < -1.0f || dirLightDirection.x > 1.0f) {
-//	dirLightStep = -dirLightStep;
-//	dirLightDirection.x += dirLightStep;
-//}

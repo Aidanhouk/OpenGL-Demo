@@ -11,10 +11,7 @@ struct struct_Vertex
 	glm::vec3 m_Position;
 	glm::vec3 m_Normal;
 	glm::vec2 m_TexCoords;
-
-	//  асательный вектор
 	glm::vec3 m_Tangent;
-	// ¬ектор бинормали (вектор, перпендикул€рный касательному вектору и вектору нормали)
 	glm::vec3 m_Bitangent;
 };
 
@@ -30,6 +27,8 @@ public:
 	std::vector<struct_Vertex> m_Vertices;
 	std::vector<unsigned int> m_Indices;
 	std::vector<struct_Texture> m_Textures;
+
+	unsigned int getVAO() { return VAO; }
 
 	Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices, std::vector<struct_Texture> textures);
 	void draw(Shader &shader);

@@ -17,7 +17,7 @@ public:
 	virtual ~PointLight() {};
 
 	virtual void bindToShader (Shader &shader) override;
-	void drawSource(Shader &shader, glm::mat4 viewMat, glm::mat4 projMat);
+	void drawSource(Shader &shader);
 
 	glm::vec3 & getPosition() { return m_Position; }
 

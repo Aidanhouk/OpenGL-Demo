@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 class VertexArray;
-class IndexBuffer;
+class ElementBuffer;
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
@@ -18,5 +18,6 @@ class Renderer
 private:
 public:
 	void clear() const;
-	void draw(const VertexArray & va, const IndexBuffer & ib) const;
+	void draw(const VertexArray & VAO, const ElementBuffer & EBO) const;
+	void draw(const VertexArray & VAO, int count) const;
 };

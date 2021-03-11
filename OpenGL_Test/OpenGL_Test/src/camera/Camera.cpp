@@ -35,7 +35,7 @@ void Camera::processKeyboard(Camera_Movement direction, float deltaTime)
 		m_Position += m_WorldUp * velocity;
 	if (direction == DOWN)
 		m_Position -= m_WorldUp * velocity;
-	//m_Position.y = 0.0f;
+	//m_Position.y = 1.0f;
 }
 
 void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
@@ -67,6 +67,12 @@ void Camera::processMouseScroll(float yoffset)
 		m_Zoom -= yoffset;
 	else if (m_Zoom >= 45.0f && yoffset > 0)
 		m_Zoom -= yoffset;
+}
+
+void Camera::turnDegree(float yaw)
+{
+	m_Yaw += yaw;
+	m_Pitch = -m_Pitch;
 }
 
 void Camera::updateCameraVectors()

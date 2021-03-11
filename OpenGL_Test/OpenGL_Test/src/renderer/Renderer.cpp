@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "vertexProcessing/VertexArray.h"
-#include "vertexProcessing/IndexBuffer.h"
+#include "vertexProcessing/ElementBuffer.h"
 #include "shader/Shader.h"
 
 void GLClearError()
@@ -21,16 +21,24 @@ bool GLLogCall(const char *function, const char *file, int line)
 	return 1;
 }
 
-void Renderer::draw(const VertexArray & vertArr, const IndexBuffer & indBuff) const
+void Renderer::draw(const VertexArray & VAO, const ElementBuffer & EBO) const
 {
-	vertArr.bind();
-	indBuff.bind();
-	GLCall(glDrawElements(GL_TRIANGLES, indBuff.getCount(), GL_UNSIGNED_INT, nullptr));
-	vertArr.unbind();
+	VAO.bind();
+	EBO.bind();
+	GLCall(glDrawElements(GL_TRIANGLES, EBO.getCount(), GL_UNSIGNED_INT, nullptr));
+	VAO.unbind();
+}
+
+void Renderer::draw(const VertexArray & VAO, int count) const
+{
+	VAO.bind();
+	GLCall(glDrawArrays(GL_TRIANGLES, 0, count));
+	VAO.unbind();
 }
 
 void Renderer::clear() const
 {
-	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
-	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	//GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+	GLCall(glClearColor(0.4f, 0.8f, 1.0f, 1.0f));
 }

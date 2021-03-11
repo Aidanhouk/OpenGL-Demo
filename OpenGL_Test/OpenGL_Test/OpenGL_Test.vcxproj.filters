@@ -114,9 +114,6 @@
     <ClCompile Include="src\lighting\DirectionalLight.cpp">
       <Filter>Source Files\light</Filter>
     </ClCompile>
-    <ClCompile Include="src\vertexProcessing\IndexBuffer.cpp">
-      <Filter>Source Files\vertexProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="src\vertexProcessing\VertexArray.cpp">
       <Filter>Source Files\vertexProcessing</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="src\shader\Shader.cpp">
       <Filter>Source Files\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertexProcessing\ElementBuffer.cpp">
+      <Filter>Source Files\vertexProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -548,16 +548,22 @@
     <None Include="src\vendor\glm\gtx\fast_trigonometry.inl">
       <Filter>Header Files\dependencies</Filter>
     </None>
-    <None Include="res\shaders\LightSource.shader">
+    <None Include="res\shaders\planet\Rock.shader" />
+    <None Include="res\shaders\planet\Planet.shader" />
+    <None Include="res\shaders\geometryShader\GeometryShader.shader" />
+    <None Include="res\shaders\geometryShader\Normals.shader" />
+    <None Include="res\shaders\default\LightSource.shader">
       <Filter>Source Files\shader\shaders</Filter>
     </None>
-    <None Include="res\shaders\Texture.shader">
-      <Filter>Source Files\shader\shaders</Filter>
-    </None>
-    <None Include="res\shaders\Model.shader">
-      <Filter>Source Files\shader\shaders</Filter>
-    </None>
-    <None Include="res\shaders\SingleColor.shader" />
+    <None Include="res\shaders\transparent\TransparentTexture.shader" />
+    <None Include="res\shaders\skybox\TextureSkybox.shader" />
+    <None Include="res\shaders\skybox\Skybox.shader" />
+    <None Include="res\shaders\shadows\pointLight\PointShadows.shader" />
+    <None Include="res\shaders\shadows\pointLight\PointShadowsDepth.shader" />
+    <None Include="res\shaders\shadows\directionalLight\DirectionalShadowsDepth.shader" />
+    <None Include="res\shaders\default\Default.shader" />
+    <None Include="res\shaders\default\DefaultNormalsParallax.shader" />
+    <None Include="res\shaders\FrameBuffer.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\glm\ext\vector_double2.hpp">
@@ -1451,9 +1457,6 @@
     <ClInclude Include="src\lighting\DirectionalLight.h">
       <Filter>Header Files\light</Filter>
     </ClInclude>
-    <ClInclude Include="src\vertexProcessing\IndexBuffer.h">
-      <Filter>Header Files\vetexProcessing</Filter>
-    </ClInclude>
     <ClInclude Include="src\vertexProcessing\VertexArray.h">
       <Filter>Header Files\vetexProcessing</Filter>
     </ClInclude>
@@ -1477,6 +1480,9 @@
     </ClInclude>
     <ClInclude Include="src\shader\Shader.h">
       <Filter>Header Files\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vertexProcessing\ElementBuffer.h">
+      <Filter>Header Files\vetexProcessing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
