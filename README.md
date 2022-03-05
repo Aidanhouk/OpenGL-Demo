@@ -1,8 +1,11 @@
-# OpenGL_Test
+# OpenGL Demo
+
+# Requirements
+OpenGL 3.3
 
 # Hotkeys:
 * Press Q to show/hide debug info.
 * Press F to switch flaslight.
 
 # Video:
-https://youtu.be/g1Lx-gvoDmE
+https://www.youtube.com/playlist?list=PLlqmWU1ThvSo9gmotLjnjnA0B0HEa-ATw
